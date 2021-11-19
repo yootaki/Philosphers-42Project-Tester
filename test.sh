@@ -23,7 +23,7 @@ printf "\n$BOLDMAGENTA _____ _   _ _                 _                  _____   
 printf "|  _  | |_|_| |___ ___ ___ ___| |_ ___ ___ ___   |_   _|__ ___| |_ ___ ___\n"
 printf "|   __|   | | | . |_ -| . | . |   | -_|  _|_ -|    | || -_|_ -|  _| -_|  _|\n"
 printf "|__|  |_|_|_|_|___|___|___|  _|_|_|___|_| |___|    |_||___|___|_| |___|_|\n"
-printf "                          |_|                                              $RESET\n"
+printf "                          |_|                                              $RESET\n\n"
 
 if [ "$#" -ne 0 ]; then
     printf "$BOLDRED Error: Wrong Arguments $RESET\n"
@@ -40,6 +40,7 @@ target="./philo"
 
 function success_test()
 {
+    printf "\e[94m[+] [$@] : Executing your program for 180 second, please wait...\e[0m\n"
     ($target $@ > /dev/null)&
     i=1
     error=0
@@ -63,6 +64,7 @@ function success_test()
 
 function failed_test()
 {
+    printf "\e[94m[+] [$@] : Executing your program, please wait...\e[0m\n"
     ($target $@ > /dev/null)&
     i=1
     error=0
@@ -84,14 +86,14 @@ function failed_test()
     fi
 }
 
-printf "\n\e[94m>> SUCCESS TEST : Executing your program for 180 second, please wait...\e[0m\n"
 # SUCCESS TESTS
 success_test '4 410 200 200'
 success_test '5 610 200 200'
 
-printf "\n\e[94m>> FAILED TEST : Executing your program, please wait...\e[0m\n"
 # FAILED TESTS
 failed_test '3 410 200 200'
 failed_test '4 410 300 200'
+
+echo
 
 rm ./philo
