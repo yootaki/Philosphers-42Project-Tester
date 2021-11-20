@@ -44,7 +44,7 @@ function success_test()
     ($target $@ >/dev/null)&
     i=1
     error=0
-    while [ $i -lt 180 ];do
+    while [ $i -lt 20 ];do
         printf "\r[%d...]" $i
         pgrep -f $target > /dev/null
         if [ "$?" -ne 0 ];then
@@ -62,7 +62,7 @@ function success_test()
     fi
 }
 
-function failed_test()
+function faile_test()
 {
     printf "\e[94m[+] [$@] : Executing your program, please wait...\e[0m\n"
     ($target $@ > /dev/null)&
@@ -87,19 +87,17 @@ function failed_test()
 }
 
 # SUCCESS TESTS
-success_test '1 800 200 200'
 success_test '4 410 200 200'
 success_test '4 310 200 100'
 success_test '5 800 200 200'
-success_test '5 800 200 200 7'
 success_test '2 400 200 100'
 success_test '2 399 200 100'
 success_test '10 400 200 100'
 success_test '100 400 200 100'
 
-# FAILED TESTS
-failed_test '3 410 200 200'
-failed_test '4 410 300 200'
+# FAILE TESTS
+faile_test '3 410 200 200'
+faile_test '4 410 300 200'
 
 echo
 rm -f ./philo
