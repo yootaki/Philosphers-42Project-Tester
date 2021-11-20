@@ -41,14 +41,14 @@ target="./philo"
 function success_test()
 {
     printf "\e[94m[+] [$@] : Executing your program for 180 second, please wait...\e[0m\n"
-    ($target $@ > /dev/null)&
+    ($target $@ >/dev/null)&
     i=1
     error=0
     while [ $i -lt 180 ];do
         printf "\r[%d...]" $i
         pgrep -f $target > /dev/null
         if [ "$?" -ne 0 ];then
-            printf "\r$RED[+] Test FailedRESET\n"
+            printf "\r$RED[+] Test Failed$RESET\n"
             error=1
             break
         fi
@@ -87,13 +87,19 @@ function failed_test()
 }
 
 # SUCCESS TESTS
+success_test '1 800 200 200'
 success_test '4 410 200 200'
-success_test '5 610 200 200'
+success_test '4 310 200 100'
+success_test '5 800 200 200'
+success_test '5 800 200 200 7'
+success_test '2 400 200 100'
+success_test '2 399 200 100'
+success_test '10 400 200 100'
+success_test '100 400 200 100'
 
 # FAILED TESTS
 failed_test '3 410 200 200'
 failed_test '4 410 300 200'
 
 echo
-
-rm ./philo
+rm -f ./philo
