@@ -87,11 +87,13 @@ function faile_test()
 }
 
 # SUCCESS TESTS
+success_test '2 410 200 200'
+success_test '3 610 200 200'
 success_test '4 410 200 200'
-success_test '5 800 200 200'
-success_test '2 410 200 100'
-success_test '10 410 200 100'
-success_test '100 410 200 100'
+success_test '5 610 200 200'
+success_test '6 410 200 200'
+success_test '10 410 200 200'
+success_test '100 410 200 200'
 
 # FAILE TESTS
 faile_test '2 399 200 100'
