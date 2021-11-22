@@ -37,14 +37,15 @@ cp ../philo .
 chmod 755 philo
 
 target="./philo"
+testtime="20"
 
 function success_test()
 {
-    printf "\e[94m[+] [$@] : Executing your program for 180 second, please wait...\e[0m\n"
+    printf "\e[94m[+] [$@] : Executing your program for $testtime second, please wait...\e[0m\n"
     ($target $@ >/dev/null)&
     i=1
     error=0
-    while [ $i -lt 20 ];do
+    while [ $i -lt $testtime ];do
         printf "\r[%d...]" $i
         pgrep -f $target > /dev/null
         if [ "$?" -ne 0 ];then
@@ -68,7 +69,7 @@ function faile_test()
     ($target $@ > /dev/null)&
     i=1
     error=0
-    while [ $i -lt 180 ];do
+    while [ $i -lt $testtime ];do
         printf "\r[%d...]" $i
         pgrep -f $target > /dev/null
         if [ "$?" -ne 0 ];then
@@ -93,6 +94,7 @@ success_test '4 410 200 200'
 success_test '5 610 200 200'
 success_test '6 410 200 200'
 success_test '10 410 200 200'
+success_test '50 410 200 200'
 success_test '100 410 200 200'
 
 # FAILE TESTS
